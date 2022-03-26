@@ -11,8 +11,42 @@ class CatTable extends React.Component {
       <th>Price</th>
     </tr>)
 
+    constructor(props){
+      super(props);
+      this.state = {
+        error: null,
+        isLoaded: false,
+        cats: [],
+    }
+    }
+
+    componentDidMount(){
+      console.log('here');
+      fetch("http://localhost:8080/cats")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            cats: result
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+    }
+
     render(){
-        let cats = this.props.cats;
+      const { error, isLoaded, cats } = this.state;
+      if (error) {
+        return <div>Error: {error.message}</div>;
+      } else if (!isLoaded) {
+        return <div>Loading...</div>;
+      } else {
         const catList = cats.map((cat) =>
         <tr key={cat.id}>
           <th >{cat.id}</th>
@@ -29,6 +63,7 @@ class CatTable extends React.Component {
             </tbody>
       </table>);
     }
+  }
 }
 
 export default CatTable

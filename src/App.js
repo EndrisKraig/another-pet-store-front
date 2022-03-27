@@ -1,13 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-import CatTable from './component/CatTable';
 
-function App() {
+
+export default function App() {
+  //TODO need to do a proper main page
   return (
-    <div className="App">
-      <CatTable/>
+    <div>
     </div>
   );
 }
-
-export default App;

@@ -1,68 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './CatTable.module.css'
 
-class CatTable extends React.Component {
+const header = (
+  <tr>
+    <th>Id</th>
+    <th>Nickname</th>
+    <th>Breed</th>
+    <th>Price</th>
+  </tr>)
 
-    header = (
-    <tr>
-      <th>Id</th>
-      <th>Nickname</th>
-      <th>Breed</th>
-      <th>Price</th>
-    </tr>)
-
-    constructor(props){
-      super(props);
-      this.state = {
-        error: null,
-        isLoaded: false,
-        cats: [],
+function CatTable() {
+  const [catsData, setCatsData] = useState(
+    {
+      error: null,
+      isLoaded: false,
+      cats: [],
     }
-    }
+  );
 
-    componentDidMount(){
-      console.log('here');
-      fetch("http://localhost:8080/cats")
+  useEffect(() => {
+    if(!catsData.isLoaded){
+    fetch("http://localhost:8080/cats")
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
+          setCatsData({
             isLoaded: true,
             cats: result
           });
         },
         (error) => {
-          this.setState({
+          setCatsData({
             isLoaded: true,
             error
           });
         }
       )
     }
-
-    render(){
-      const { error, isLoaded, cats } = this.state;
-      if (error) {
-        return <div>Error: {error.message}</div>;
-      } else if (!isLoaded) {
-        return <div>Loading...</div>;
-      } else {
-        const catList = cats.map((cat) =>
-        <tr key={cat.id}>
-          <th >{cat.id}</th>
-          <th>{cat.nickname}</th>
-          <th>{cat.breed}</th>
-          <th>{cat.price}</th>
-        </tr>
-        ) 
-        return (
-        <table className={styles.center}>
-            <tbody>
-                {this.header}
-                {catList}
-            </tbody>
+  });
+  const { error, isLoaded, cats } = catsData;
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    const catList = cats.map((cat) =>
+      <tr key={cat.id}>
+        <th onClick={() => this.props.onClick(cat.nickname)}>{cat.id}</th>
+        <th>{cat.nickname}</th>
+        <th>{cat.breed}</th>
+        <th>{cat.price}</th>
+      </tr>
+    )
+    return (
+      <table className={styles.center}>
+        <tbody>
+          {header}
+          {catList}
+        </tbody>
       </table>);
-    }
   }
 }
 

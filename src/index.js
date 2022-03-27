@@ -1,17 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { render } from "react-dom";
+import {
+  useParams,
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import App from "./App";
+import CatDetails from "./component/CatDetails";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import MainScreen from "./component/MainScreen";
+
+const rootElement = document.getElementById("root");
+render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MainScreen />} />
+      <Route path="cat" element={<Wrapper />}>
+        
+      </Route>
+      <Route path="cat/:id" element={<Wrapper />} />
+    </Routes>
+  </BrowserRouter>,
+  rootElement
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function Wrapper(){
+  let {id} = useParams();
+  return (
+    <CatDetails id={id}/>
+  )
+}

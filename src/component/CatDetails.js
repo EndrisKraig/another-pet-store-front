@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import GetRequest from "../service/FetchService";
 
 function CatDetails() {
   const [catData, setCatData] = useState({
@@ -12,23 +13,19 @@ function CatDetails() {
 
   useEffect(() => {
     if (!catData.isLoaded) {
-      fetch("http://localhost:8080/cats/" + id)
-        .then(res => res.json())
-        .then(
-          (result) => {
-
-            setCatData({
-              isLoaded: true,
-              cat: result
-            });
-          },
-          (error) => {
-            setCatData({
-              isLoaded: true,
-              error
-            });
-          }
-        )
+      GetRequest("/cats/" + id,
+      (result) => {
+        setCatData({
+          isLoaded: true,
+          cat: result
+        });
+      },
+      (error) => {
+        setCatData({
+          isLoaded: true,
+          error
+        });
+      });
     }
   });
 

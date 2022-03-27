@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import GetRequest from '../service/FetchService';
 import styles from './CatTable.module.css'
 
 const header = (
@@ -19,10 +20,8 @@ function CatTable() {
   );
 
   useEffect(() => {
-    if(!catsData.isLoaded){
-    fetch("http://localhost:8080/cats")
-      .then(res => res.json())
-      .then(
+    if (!catsData.isLoaded) {
+      GetRequest("/cats",
         (result) => {
           setCatsData({
             isLoaded: true,
@@ -34,8 +33,7 @@ function CatTable() {
             isLoaded: true,
             error
           });
-        }
-      )
+        })
     }
   });
   const { error, isLoaded, cats } = catsData;

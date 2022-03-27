@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GetRequest from '../service/FetchService';
+import CatAdder from './CatAdder';
 import styles from './CatTable.module.css'
 
 const header = (
@@ -36,6 +37,7 @@ function CatTable() {
         })
     }
   });
+
   const { error, isLoaded, cats } = catsData;
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -51,12 +53,16 @@ function CatTable() {
       </tr>
     )
     return (
-      <table className={styles.center}>
-        <tbody>
-          {header}
-          {catList}
-        </tbody>
-      </table>);
+      <div>
+        <table className={styles.center}>
+          <tbody>
+            {header}
+            {catList}
+          </tbody>
+        </table>
+        <a href='http://localhost:3000/add'>Add new cat</a>
+      </div>
+    );
   }
 }
 

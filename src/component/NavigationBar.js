@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./NavigatorBar.module.css"
 
-const links = ["Home", "Cats", "Login"];
+const links = ["Home", "Cats", "New cat", "Login"];
 
 export default function NavigationBar(props) {
     console.log(props.path);

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PostRequest } from "../service/FetchService";
+import FancyButton from "./FancyButton";
 
 function CatAdder() {
     const [cat, setCat] = useState({
@@ -44,8 +45,8 @@ function CatAdder() {
                     name="price"
                     onChange={e => setCat({ ...cat, "price": Number(e.target.value) })}
                 />
-
-                <input type="submit" name="Add cat!" />
+                <p/>
+                <FancyButton label="Add new cat!"/>
             </form>
         </div>
 

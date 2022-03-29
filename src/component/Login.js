@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styles from "./Login.module.css"
 import PropTypes from 'prop-types'
+import FancyButton from "./FancyButton";
 
 async function loginUser(credentials) {
     const data = new FormData();
@@ -41,7 +42,7 @@ export default function Login({setToken}) {
                 </lable>
                 <p/>
                 <div>
-                    <button type="submit">Log In</button>
+                    <FancyButton label="Login"/>
                 </div>
             </form>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import GetRequest from "../service/FetchService";
+import Loader from "./Loader";
 
 function CatDetails() {
   const [catData, setCatData] = useState({
@@ -30,7 +31,7 @@ function CatDetails() {
   });
 
   if (!catData.isLoaded) {
-    return (<div>loading...</div>)
+    return (<Loader/>)
   }
   const cat = catData.cat;
   //TODO read about routing a litle more, e.g. what is outlet and do i realy need it?

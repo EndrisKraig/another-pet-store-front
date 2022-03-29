@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GetRequest from '../service/FetchService';
 import CatAdder from './CatAdder';
 import styles from './CatTable.module.css'
+import Loader from './Loader';
 
 const header = (
   <tr>
@@ -42,7 +43,7 @@ function CatTable() {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return (<Loader/>);
   } else {
     const catList = cats.map((cat) =>
       <tr key={cat.id}>

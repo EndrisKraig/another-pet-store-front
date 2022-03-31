@@ -1,11 +1,8 @@
-import { useState } from "react";
 import useToken from "./hook/useToken";
 import {
   BrowserRouter,
   Routes,
   Route,
-  useParams,
-  useLocation,
 } from "react-router-dom";
 
 import CatAdder from "./component/CatAdder";

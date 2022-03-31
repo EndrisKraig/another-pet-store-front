@@ -32,14 +32,14 @@ export default function Login({setToken}) {
         <div className={styles.login_wrapper}>
             <h1>Please Log In</h1>
             <form onSubmit={handleSubmit}>
-                <lable>
+                <label>
                     <p>Username</p>
                     <input type="text" onChange={e => setUsername(e.target.value)} />
-                </lable>
-                <lable>
+                </label>
+                <label>
                     <p>Password</p>
                     <input type="password" onChange={e => setPassword(e.target.value)}/>
-                </lable>
+                </label>
                 <p/>
                 <div>
                     <FancyButton label="Login"/>

@@ -10,6 +10,7 @@ import CatDetails from "./component/CatDetails";
 import MainScreen from "./component/MainScreen";
 import Login from "./component/Login"
 import NavigationBar from "./component/NavigationBar";
+import Registration from "./component/Registration";
 
 export default function App() {
   const {token, setToken} = useToken();
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/" element={<MainScreen />} />
           <Route path="cat/:id" element={<CatDetails />} />
           <Route path="add" element={<CatAdder />} />
+          <Route path="register" element={<Registration/>}/>
         </Routes>
       </BrowserRouter>
     </div>

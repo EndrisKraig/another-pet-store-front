@@ -14,9 +14,6 @@ import Registration from "./component/Registration";
 
 export default function App() {
   const {token, setToken} = useToken();
-  if(!token){
-    return <Login setToken={setToken} />
-  }
 
   return (
     <div>
@@ -27,6 +24,7 @@ export default function App() {
           <Route path="cat/:id" element={<CatDetails />} />
           <Route path="add" element={<CatAdder />} />
           <Route path="register" element={<Registration/>}/>
+          <Route path="login" element={<Login setToken={setToken}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

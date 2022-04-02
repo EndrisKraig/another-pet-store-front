@@ -20,7 +20,7 @@ export default function App() {
 
   return (
     <div>
-      <NavigationBar/>
+      <NavigationBar token={token}/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainScreen />} />

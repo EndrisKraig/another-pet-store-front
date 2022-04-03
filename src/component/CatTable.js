@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import GetRequest from '../service/FetchService';
-import CatAdder from './CatAdder';
 import styles from './CatTable.module.css'
 import Loader from './Loader';
 
@@ -61,7 +60,6 @@ function CatTable() {
             {catList}
           </tbody>
         </table>
-        <a href='http://localhost:3000/add'>Add new cat</a>
       </div>
     );
   }

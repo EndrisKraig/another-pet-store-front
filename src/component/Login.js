@@ -26,6 +26,7 @@ export default function Login({setToken}) {
             password
         });
         setToken(resp.token);
+        window.location.href = "/";
     }
     
     return (
@@ -42,7 +43,7 @@ export default function Login({setToken}) {
                 </label>
                 <p/>
                 <div>
-                    <FancyButton label="Login"/>
+                    <FancyButton label="Login" action={() => window.location.href = "/"}/>
                 </div>
             </form>
         </div>

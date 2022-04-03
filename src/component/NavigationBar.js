@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "./NavigatorBar.module.css"
 import { GetRequestAuth } from "../service/FetchService"
+import NavigationRef from "./NavigationRef";
 
-const links = ["Home", "Cats", "New cat", "Login"];
+const links = [{"name":"Home", "link":"/"},{"name":"Cats", "link":"/"},{"name":"Add cat", "link":"/add"}];
 
 export default function NavigationBar(props) {
-    const [elems, setElems] = useState({ "active": links[0], "isLogged": false, "isLoaded": false, name: "Log In" });
+    const [elems, setElems] = useState({ "active": sessionStorage.getItem('activeTab'), "isLogged": false, "isLoaded": false, name: "Log In" });
     const activeElem = elems.active;
     const token = props.token;
     useEffect(() => {
-        console.log("refresh")
-        if (elems.isLoaded == false) {
+        if (elems.isLoaded === false && token) {
             GetRequestAuth("/me",
                 (resp) => {
                     setElems({ ...elems, "name": resp.name, isLoggedIn: true, isLoaded: true });
@@ -21,20 +21,32 @@ export default function NavigationBar(props) {
                 token);
         }
     }
-    )
+    );
+    const updateActiveLink = (link) => sessionStorage.setItem('activeTab', link);
 
-    const renderLinks = links.map((link) => {
-        if (link === activeElem) {
-            return <a key={link} className={styles.active}>{link}</a>
+    const renderLinks = links.map((l) => {
+        if (l.name === activeElem) {
+            return createNavigationRef(l.name, styles.active, l.link, () => updateActiveLink(l.name));
         } else {
-            return <a key={link} className={styles.a} onClick={() => setElems({ "active": link })}>{link}</a>
+            return createNavigationRef(l.name, styles.a, l.link, () => updateActiveLink(l.name));
         }
     });
-
+    var profileLink;
+    if(elems.isLogged === true){
+        profileLink = "/profile";
+    }else{
+        profileLink = "login";
+    }
+    renderLinks.push(
+        createNavigationRef(elems.name, styles.profile, profileLink, () => {})
+    )
     return (
         <div className={styles.topnav}>
             {renderLinks}
-            <a key="profile" className={styles.profile}>{elems.name}</a>
         </div>
     );
+}
+
+function createNavigationRef(name, style, ref, action) {
+    return (<NavigationRef key={name} name={name} style={style} link={ref} action={action} />);
 }

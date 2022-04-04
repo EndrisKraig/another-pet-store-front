@@ -1,0 +1,15 @@
+.param{
+    display: inline-block;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 3%;
+}
+
+.value{
+    display: inline-block;
+    font-size: 16px;
+}
+
+.outer{
+    font-size: large;
+}

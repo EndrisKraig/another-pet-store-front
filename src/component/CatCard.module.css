@@ -1,0 +1,28 @@
+
+
+.image {
+    display: inline-block;
+    width: 200px;
+    height: 300px;
+    margin: 1%;
+    border-radius: 25%;
+}
+
+.info{
+    display: inline-block;
+    vertical-align:  top;
+    margin:  1%;
+}
+
+.name{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cat_card{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 1%;
+    justify-content: center;
+}

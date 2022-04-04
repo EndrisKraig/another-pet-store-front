@@ -24,6 +24,11 @@
   color: white;
 }
 
+.Container{
+  height: 200px;
+  position: relative;
+}
+
 .App-link {
   color: #61dafb;
 }

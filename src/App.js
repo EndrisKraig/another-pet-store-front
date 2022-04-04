@@ -11,12 +11,14 @@ import MainScreen from "./component/MainScreen";
 import Login from "./component/Login"
 import NavigationBar from "./component/NavigationBar";
 import Registration from "./component/Registration";
+import styles from "./App.css"
+import CatCardHolder from "./component/CatCardsHolder";
 
 export default function App() {
   const {token, setToken} = useToken();
 
   return (
-    <div>
+    <div className={styles.container}>
       <NavigationBar token={token}/>
       <BrowserRouter>
         <Routes>
@@ -25,6 +27,7 @@ export default function App() {
           <Route path="add" element={<CatAdder />} />
           <Route path="register" element={<Registration/>}/>
           <Route path="login" element={<Login setToken={setToken}/>}/>
+          <Route path="catcard" element={<CatCardHolder/>}/>
         </Routes>
       </BrowserRouter>
     </div>

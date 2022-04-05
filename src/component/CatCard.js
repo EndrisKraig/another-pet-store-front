@@ -3,10 +3,8 @@ import styles from "./CatCard.module.css"
 import ParamCouple from "./ParamCouple";
 
 export default function CatCard(props) {
-    console.log("!!!!!!!!!!!!!!!!!!!")
     var cat = props.cat;
-    console.log("!!!!!!!!!!!!!!!!!!!")
-    console.log(cat);
+    
     return (
         <div className={styles.cat_card}>
 

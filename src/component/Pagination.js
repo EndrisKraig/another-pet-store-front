@@ -1,37 +1,85 @@
 import React from "react";
-import styles from "./Pagination.module.css"
+import { usePagination } from "../hook/usePagination";
+import './Pagination.module.scss'
+import classnames from 'classnames';
+
+const DOTS = '...';
 
 export default function Pagination(props) {
 
-    var numbers = [];
-    //TODO improve pagination. 1. Show current page 2. Figure out spase between 1 page and cur + cur and last page. 3. Last page condition 4. Not clickable star (*) symbol
-    const clickAction = props.clickAction;
-    const maxPage = props.maxPage;
-    var page = props.curPage;
-    if(maxPage < 10){
-        numbers = Array.from({ length: maxPage }, (_, i) => i + 1);
-    }else if(page === 2 || page == 1){
-        numbers.push(1);
-        Array.from({ length: 7 }, (_, i) => numbers.push(page++ + 1));
-        numbers.push('*');
-        numbers.push(maxPage);
-    }else{
-        numbers.push(1)
-        numbers.push('*');
-        numbers.push(page-1);
-        Array.from({ length: 5 }, (_, i) => numbers.push(page++ + 1));
-        numbers.push('*');
-        numbers.push(maxPage);
+    const {
+        onPageChange,
+        totalPageCount,
+        siblingCount = 1,
+        currentPage,
+        pageSize,
+        className
+    } = props;
+
+    const paginationRange = usePagination({
+        totalPageCount,
+        pageSize,
+        siblingCount,
+        currentPage,
+      });
+
+    if(currentPage == 0 || paginationRange < 2){
+        return null;
     }
 
+    const onNext = () => {
+        onPageChange(currentPage + 1);
+    };
+
+    const onPrevious = () =>{
+        onPageChange(currentPage -1);
+    }
+
+    let lastPage = paginationRange[paginationRange.length - 1];
+
     return (
-        <div>
-            |
-            {numbers.map((num, i) => {
-                return <div key={i} className={styles.block} onClick={() => clickAction(num)}>{num}</div>
+        <ul
+          className={classnames('pagination-container', { [className]: className })}
+        >
+           {/* Left navigation arrow */}
+          <li
+            className={classnames('pagination-item', {
+              disabled: currentPage === 1
             })}
-            |
-        </div>
-    )
+            onClick={onPrevious}
+          >
+            <div className="arrow left" />
+          </li>
+          {paginationRange.map(pageNumber => {
+             
+            // If the pageItem is a DOT, render the DOTS unicode character
+            if (pageNumber === DOTS) {
+              return <li className="pagination-item dots">&#8230;</li>;
+            }
+            
+            // Render our Page Pills
+            return (
+              <li
+                className={classnames('pagination-item', {
+                  selected: pageNumber === currentPage
+                })}
+                onClick={() => onPageChange(pageNumber)}
+              >
+                {pageNumber}
+              </li>
+            );
+          })}
+          {/*  Right Navigation arrow */}
+          <li
+            className={classnames('pagination-item', {
+              disabled: currentPage === lastPage
+            })}
+            onClick={onNext}
+          >
+            <div className="arrow right" />
+          </li>
+        </ul>
+      );
+    
 
 }

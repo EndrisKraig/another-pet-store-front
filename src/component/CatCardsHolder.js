@@ -34,7 +34,7 @@ export default function CatCardHolder() {
     return (
         <div className={styles.outer}>
             {catsList}
-            <Pagination curPage={data.page} maxPage={data.resp.maxPage} clickAction={(page) => setData({"page":page, "isLoaded":false, "limit":data.limit})} />
+            <Pagination className={styles.outer} currentPage={data.page} pageSize={data.limit} totalPageCount={data.resp.maxPage} onPageChange={(page) => setData({"page":page, "isLoaded":false, "limit":data.limit})} />
         </div>
     )
 }

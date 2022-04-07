@@ -1,4 +1,7 @@
 .outer {
     width: 95%;
     margin: 2%;
+    display: flexbox;
+    justify-content: center;
+    align-content: center;
 }

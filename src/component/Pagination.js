@@ -10,7 +10,7 @@ export default function Pagination(props) {
     const {
         onPageChange,
         totalPageCount,
-        siblingCount = 13,
+        siblingCount = 5,
         currentPage,
         pageSize,
         className

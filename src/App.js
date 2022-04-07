@@ -27,7 +27,7 @@ export default function App() {
           <Route path="add" element={<CatAdder />} />
           <Route path="register" element={<Registration/>}/>
           <Route path="login" element={<Login setToken={setToken}/>}/>
-          <Route path="catcard" element={<CatCardHolder/>}/>
+          <Route path="cats" element={<CatCardHolder/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PostRequest } from "../service/FetchService";
 import FancyButton from "./FancyButton";
+import styles from './CatAdder.module.css'
 
 function CatAdder() {
     const [cat, setCat] = useState({
@@ -18,10 +19,9 @@ function CatAdder() {
 
 
     return (
-        <div>
-            <h2>Add new cat</h2>
-            <p />
-            <form onSubmit={submit}>
+        <div className={styles.out}>
+            <form className={styles.in} onSubmit={submit}>
+                <h2>Add new cat!</h2>
                 <label>Nickname</label>
                 <p/>
                 <input

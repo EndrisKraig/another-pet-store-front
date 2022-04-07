@@ -1,10 +1,11 @@
 import React from "react";
-import CatTable from './CatTable';
+import styles from "./MainScreen.module.css"
 
 function MainScreen() {
   return (
-    <div className="App">
-      <CatTable onClick={(element => this.addElement(element))} />
+    <div className={styles.text}>
+      Welcome to another pet store!<p/>
+      Please click on menu bar above to proceed further...
     </div>
   );
 }

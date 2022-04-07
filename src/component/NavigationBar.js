@@ -3,9 +3,14 @@ import styles from "./NavigatorBar.module.css"
 import { GetRequestAuth } from "../service/FetchService"
 import NavigationRef from "./NavigationRef";
 
-const links = [{"name":"Home", "link":"/"},{"name":"Cats", "link":"/"},{"name":"Add cat", "link":"/add"}];
+const links = [{"name":"Home", "link":"/"},{"name":"Cats", "link":"/cats"},{"name":"Add cat", "link":"/add"}];
 
 export default function NavigationBar(props) {
+    var activeTab = "Home";
+    const savedTab = sessionStorage.getItem('activeTab');
+    if(savedTab === null){
+        sessionStorage.setItem('activeTab', "Home");
+    }
     const [elems, setElems] = useState({ "active": sessionStorage.getItem('activeTab'), "isLogged": false, "isLoaded": false, name: "Log In" });
     const activeElem = elems.active;
     const token = props.token;

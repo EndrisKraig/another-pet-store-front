@@ -1,46 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Outlet } from "react-router-dom";
-import GetRequest from "../service/FetchService";
+import { GetRequest, PostRequestNew } from "../service/FetchService";
 import Loader from "./Loader";
+import CatCard from "./CatCard";
+import useToken from "../hook/useToken";
 
-function CatDetails() {
-  const [catData, setCatData] = useState({
-    isLoaded: false,
-    error: null,
-    cat: {}
-  });
-  let { id } = useParams();
-
+export default function CatDetails() {
+  const [catDetails, setCatDetails] = useState({ isLoaded: false });
+  const { id } = useParams();
+  const { token, setToken } = useToken();
+  console.log(token);
+  const act = () => {
+    PostRequestNew("/cats/" + id, 
+    {},
+     (resp) => { window.location.href = "/cats/" + id + "/success" },
+    (error) => { window.location.href = "/cats/" + id + "/error" }, token);
+  };
   useEffect(() => {
-    if (!catData.isLoaded) {
+    if (catDetails.isLoaded === false) {
       GetRequest("/cats/" + id,
-      (result) => {
-        setCatData({
-          isLoaded: true,
-          cat: result
-        });
-      },
-      (error) => {
-        setCatData({
-          isLoaded: true,
-          error
-        });
-      });
+        (resp) => {
+          setCatDetails({ ...catDetails, isLoaded: true, cat: resp })
+        },
+        (error) => {
+          setCatDetails({ ...catDetails, isLoaded: true })
+          console.log("Error: " + error);
+        })
     }
   });
 
-  if (!catData.isLoaded) {
-    return (<Loader/>)
+  if (catDetails.isLoaded === false) {
+    return (<Loader />);
   }
-  const cat = catData.cat;
-  //TODO read about routing a litle more, e.g. what is outlet and do i realy need it?
-  return (<div>
-    {cat.id + " with nickname " + cat.nickname}
-    <Outlet />
-  </div>
-  )
+  return (
+    <CatCard cat={catDetails.cat} buttonAction={() => act()} />
+  );
 }
-
-export default CatDetails
 

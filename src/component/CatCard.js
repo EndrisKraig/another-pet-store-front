@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./CatCard.module.css"
+import FancyButton from "./FancyButton";
 import ParamCouple from "./ParamCouple";
 
 export default function CatCard(props) {
     var cat = props.cat;
-    
+
     return (
         <div className={styles.cat_card}>
 
@@ -17,6 +18,9 @@ export default function CatCard(props) {
                 <ParamCouple param="Price" value={cat.price} />
                 <ParamCouple param="Age" value={cat.age} />
                 <ParamCouple param="Create" value={cat.createAt} />
+            </div>
+            <div className={styles.btn_container}>
+                <FancyButton style={styles.btn} label={'Adopt now!'} btnAction={props.buttonAction} />
             </div>
         </div>
     )

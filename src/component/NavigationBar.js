@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import styles from "./NavigatorBar.module.css"
 import { GetRequestAuth } from "../service/FetchService"
 import NavigationRef from "./NavigationRef";
+import NavigationProfile from "./NavigationProfile";
 
 const links = [{"name":"Home", "link":"/"},{"name":"Cats", "link":"/cats"},{"name":"Add cat", "link":"/add"}];
 
 export default function NavigationBar(props) {
-    var activeTab = "Home";
     const savedTab = sessionStorage.getItem('activeTab');
     if(savedTab === null){
         sessionStorage.setItem('activeTab', "Home");
     }
-    const [elems, setElems] = useState({ "active": sessionStorage.getItem('activeTab'), "isLogged": false, "isLoaded": false, name: "Log In" });
+    const [elems, setElems] = useState({ "active": sessionStorage.getItem('activeTab'), "isLoggedIn": false, "isLoaded": false, name: "Log In" });
     const activeElem = elems.active;
     const token = props.token;
     useEffect(() => {
         if (elems.isLoaded === false && token) {
-            GetRequestAuth("/me",
+            GetRequestAuth("/profile",
                 (resp) => {
-                    setElems({ ...elems, "name": resp.name, isLoggedIn: true, isLoaded: true });
+                    setElems({ ...elems, nickname: resp.nickname, isLoggedIn: true, isLoaded: true, balance: resp.balance });
                 },
                 (error) => {
                     setElems({ ...elems, isLoaded: true });
@@ -36,15 +36,17 @@ export default function NavigationBar(props) {
             return createNavigationRef(l.name, styles.a, l.link, () => updateActiveLink(l.name));
         }
     });
-    var profileLink;
-    if(elems.isLogged === true){
-        profileLink = "/profile";
+
+    if(elems.isLoggedIn === true){
+        renderLinks.push(
+            <NavigationProfile key={elems.nickname} linkName={elems.nickname} style={styles.profile} link={"/profile"} action={() => {}} balance={elems.balance}/>
+        )
     }else{
-        profileLink = "login";
+        renderLinks.push(
+            createNavigationRef(elems.name, styles.profile, "/login", () => {})
+        )
     }
-    renderLinks.push(
-        createNavigationRef(elems.name, styles.profile, profileLink, () => {})
-    )
+    
     return (
         <div className={styles.topnav}>
             {renderLinks}

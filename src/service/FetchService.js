@@ -41,4 +41,23 @@ export function PostRequest(path, data) {
 
 }
 
+export function PostRequestNew(path, data, resultSaver, errorSaver, token) {
+    console.log(token);
+    fetch(BASE_URL + path, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json', 'Authorization': token},
+    })
+        .then(res => res.json())
+        .then(
+            (result) => {
+                resultSaver(result);
+            },
+            (error) => {
+                errorSaver(error);
+            }
+        )
+
+}
+
 export default GetRequest;

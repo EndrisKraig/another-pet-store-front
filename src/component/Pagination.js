@@ -1,6 +1,6 @@
 import React from "react";
 import { usePagination } from "../hook/usePagination";
-import './Pagination.module.scss'
+import './Pagination.scss'
 import classnames from 'classnames';
 
 const DOTS = '...';
@@ -10,7 +10,7 @@ export default function Pagination(props) {
     const {
         onPageChange,
         totalPageCount,
-        siblingCount = 1,
+        siblingCount = 13,
         currentPage,
         pageSize,
         className
@@ -36,7 +36,7 @@ export default function Pagination(props) {
     }
 
     let lastPage = paginationRange[paginationRange.length - 1];
-
+    //TODO figure out how css works here
     return (
         <ul
           className={classnames('pagination-container', { [className]: className })}

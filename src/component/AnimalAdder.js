@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { PostRequest } from "../service/FetchService";
 import FancyButton from "./FancyButton";
-import styles from './CatAdder.module.css'
+import styles from './AnimalAdder.module.css'
 
-function CatAdder() {
-    const [cat, setCat] = useState({
+function AnimalAdder() {
+    const [animal, setAnimal] = useState({
         "nickname": null,
         "breed": null,
         "price": 0
@@ -12,8 +12,8 @@ function CatAdder() {
 
     const submit = e => {
         e.preventDefault();
-        PostRequest("/cats", cat);
-        alert('Cat added!');
+        PostRequest("/animal", animal);
+        alert('Animal added!');
       }
     
 
@@ -21,13 +21,13 @@ function CatAdder() {
     return (
         <div className={styles.out}>
             <form className={styles.in} onSubmit={submit}>
-                <h2>Add new cat!</h2>
+                <h2>Add new animal!</h2>
                 <label>Nickname</label>
                 <p/>
                 <input
                     type="text"
                     name="nickname"
-                    onChange={e => setCat({ ...cat, "nickname": e.target.value })}
+                    onChange={e => setAnimal({ ...animal, "nickname": e.target.value })}
                 />
                 <p/>
                 <label>Breed</label>
@@ -35,7 +35,7 @@ function CatAdder() {
                 <input
                     type="text"
                     name="breed"
-                    onChange={e => setCat({ ...cat, "breed": e.target.value })}
+                    onChange={e => setAnimal({ ...animal, "breed": e.target.value })}
                 />
                 <p/>
                 <label>Price</label>
@@ -43,14 +43,14 @@ function CatAdder() {
                 <input
                     type="number"
                     name="price"
-                    onChange={e => setCat({ ...cat, "price": Number(e.target.value) })}
+                    onChange={e => setAnimal({ ...animal, "price": Number(e.target.value) })}
                 />
                 <p/>
-                <FancyButton label="Add new cat!"/>
+                <FancyButton label="Add new animal!"/>
             </form>
         </div>
 
     );
 }
 
-export default CatAdder;
+export default AnimalAdder;

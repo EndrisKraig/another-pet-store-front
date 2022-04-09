@@ -5,16 +5,16 @@ import {
   Route,
 } from "react-router-dom";
 
-import CatAdder from "./component/CatAdder";
-import CatDetails from "./component/CatDetails";
+import AnimalAdder from "./component/AnimalAdder";
+import AnimalDetails from "./component/AnimalDetails";
 import MainScreen from "./component/MainScreen";
 import Login from "./component/Login"
 import NavigationBar from "./component/NavigationBar";
 import Registration from "./component/Registration";
 import styles from "./App.css"
-import CatCardHolder from "./component/CatCardsHolder";
-import CatSold from "./component/CatSold";
-import ErrorSoldCat from "./component/ErrorSoldCat"
+import AnimalCardHolder from "./component/AnimalCardsHolder";
+import AnimalSold from "./component/AnimalSold";
+import ErrorSoldAnimal from "./component/ErrorSoldAnimal"
 
 export default function App() {
   const {token, setToken} = useToken();
@@ -25,13 +25,13 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainScreen />} />
-          <Route path="cats/:id" element={<CatDetails />} />
-          <Route path="add" element={<CatAdder />} />
+          <Route path="animals/:id" element={<AnimalDetails />} />
+          <Route path="add" element={<AnimalAdder />} />
           <Route path="register" element={<Registration/>}/>
           <Route path="login" element={<Login setToken={setToken}/>}/>
-          <Route path="cats" element={<CatCardHolder/>}/>
-          <Route path="cats/:id/success" element={<CatSold/>}/>
-          <Route path="cats/:id/error" element={<ErrorSoldCat/>}/>
+          <Route path="animals" element={<AnimalCardHolder/>}/>
+          <Route path="animals/:id/success" element={<AnimalSold/>}/>
+          <Route path="animals/:id/error" element={<ErrorSoldAnimal/>}/>
         </Routes>
       </BrowserRouter>
     </div>

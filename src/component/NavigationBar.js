@@ -4,7 +4,7 @@ import { GetRequestAuth } from "../service/FetchService"
 import NavigationRef from "./NavigationRef";
 import NavigationProfile from "./NavigationProfile";
 
-const links = [{"name":"Home", "link":"/"},{"name":"Cats", "link":"/cats"},{"name":"Add cat", "link":"/add"}];
+const links = [{"name":"Home", "link":"/"},{"name":"Animals", "link":"/animals"},{"name":"Add animal", "link":"/add"}];
 
 export default function NavigationBar(props) {
     const savedTab = sessionStorage.getItem('activeTab');

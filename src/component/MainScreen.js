@@ -10,4 +10,5 @@ function MainScreen() {
     </div>
   );
 }
+
 export default MainScreen;

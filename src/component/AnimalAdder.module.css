@@ -3,9 +3,36 @@
     display: flex;
     justify-content: center;
     margin: auto;
+    padding-top: 5%;
 }
 
 .in{
     width: auto;
     margin: auto;
+    background-color:rgb(231, 231, 231);
+    padding: 1%;
+    border-radius: 2%;
+}
+
+input{
+    border-radius: 100px;
+    border-style: none;
+}
+
+label{
+    font-weight:600;
+}
+.submit{
+    border-radius: 100px;
+    background-color: green;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
+select {
+    border-radius: 100px;
+    border-style: none;
 }

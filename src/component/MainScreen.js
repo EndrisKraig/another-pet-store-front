@@ -1,4 +1,5 @@
 import React from "react";
+import AnimalSpecials from "./AnimalSpecials";
 import styles from "./MainScreen.module.css"
 
 function MainScreen() {
@@ -6,7 +7,7 @@ function MainScreen() {
     <div className={styles.text}>
       Welcome to another pet store!<p/>
       Please click on menu bar above to proceed further...<p/>
-      Here will be special offers someday...
+      <AnimalSpecials/>
     </div>
   );
 }

@@ -1,0 +1,9 @@
+.out{
+    border: 1px solid black;
+}
+
+.in{
+    display: inline-block;
+    flex-direction: row; 
+    font-size: 200px;
+}

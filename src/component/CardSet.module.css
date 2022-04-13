@@ -1,0 +1,5 @@
+.in{
+    display: inline-block;
+    flex-direction: row; 
+    width: 80%;
+}

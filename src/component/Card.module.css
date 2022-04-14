@@ -7,4 +7,5 @@ img{
     display: inline-block;
     flex-direction: row; 
     margin: 0.5%;
+    border: 1px solid black;
 }

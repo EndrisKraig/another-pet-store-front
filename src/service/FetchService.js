@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://localhost:3100";//"http://localhost:8080";
 
 export function GetRequest(path, resultSaver, errorSaver) {
     fetch(BASE_URL + path)

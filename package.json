@@ -17,7 +17,8 @@
     "start": "NODE_ENV=development react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mocks" : "mocks-server"
   },
   "eslintConfig": {
     "extends": [
@@ -38,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "@mocks-server/main": "^2.6.3",
     "eslint-plugin-react-hooks": "^4.4.0"
   }
 }

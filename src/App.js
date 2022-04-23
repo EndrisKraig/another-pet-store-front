@@ -5,16 +5,16 @@ import {
   Route,
 } from "react-router-dom";
 
-import AnimalAdder from "./component/AnimalAdder";
-import AnimalDetails from "./component/AnimalDetails";
+import AnimalAdder from "./component/animal/AnimalAdder";
+import AnimalDetails from "./component/animal/AnimalDetails";
 import MainScreen from "./component/MainScreen";
-import Login from "./component/Login"
-import NavigationBar from "./component/NavigationBar";
-import Registration from "./component/Registration";
+import Login from "./component/auth/Login"
+import NavigationBar from "./component/navigation/NavigationBar";
+import Registration from "./component/auth/Registration";
 import styles from "./App.module.css"
-import AnimalCardHolder from "./component/AnimalCardsHolder";
-import AnimalSold from "./component/AnimalSold";
-import ErrorSoldAnimal from "./component/ErrorSoldAnimal"
+import AnimalCardHolder from "./component/animal/AnimalCardsHolder";
+import AnimalSold from "./component/animal/AnimalSold";
+import ErrorSoldAnimal from "./component/animal/ErrorSoldAnimal"
 
 export default function App() {
   const { token, setToken } = useToken();

@@ -2,9 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import styles from "./AnimalSpecials.module.css"
-import GetRequest from "../service/FetchService";
+import GetRequest from "../../service/FetchService";
 import CardSet from "./CardSet";
-import Loader from "./Loader";
+import Loader from "../common/Loader";
 
 export default function AnimalSpecials() {
 

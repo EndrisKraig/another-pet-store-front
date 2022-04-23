@@ -1,5 +1,5 @@
 import React from "react";
-import AnimalSpecials from "./AnimalSpecials";
+import AnimalSpecials from "./animal/AnimalSpecials";
 import styles from "./MainScreen.module.css"
 
 function MainScreen() {

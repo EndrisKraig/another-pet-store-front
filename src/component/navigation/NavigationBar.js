@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./NavigationBar.module.css"
-import { GetRequestAuth } from "../service/FetchService"
+import { GetRequestAuth } from "../../service/FetchService"
 import NavigationRef from "./NavigationRef";
 import NavigationProfile from "./NavigationProfile";
 

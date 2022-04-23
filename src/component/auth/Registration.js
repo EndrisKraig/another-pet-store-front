@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { PostRequest } from "../service/FetchService"
-import FancyButton from "./FancyButton";
+import { PostRequest } from "../../service/FetchService"
+import FancyButton from "../common/FancyButton";
 //TODO form validation
 export default function Registration() {
     const [profile, setProfile] = useState();

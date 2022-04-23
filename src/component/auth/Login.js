@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from "./Login.module.css"
 import PropTypes from 'prop-types'
-import FancyButton from "./FancyButton";
+import FancyButton from "../common/FancyButton";
 
 async function loginUser(credentials) {
     const data = new FormData();

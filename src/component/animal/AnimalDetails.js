@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GetRequest, PostRequestNew } from "../service/FetchService";
-import Loader from "./Loader";
+import { GetRequest, PostRequestNew } from "../../service/FetchService";
+import Loader from "../common/Loader";
 import AnimalCard from "./AnimalCard";
-import useToken from "../hook/useToken";
+import useToken from "../../hook/useToken";
 
 export default function AnimalDetails() {
   const [animalDetails, setAnimalDetails] = useState({ isLoaded: false });

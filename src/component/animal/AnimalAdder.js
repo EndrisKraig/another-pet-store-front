@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import GetRequest, { PostRequest } from "../service/FetchService";
-import FancyButton from "./FancyButton";
+import GetRequest, { PostRequest } from "../../service/FetchService";
+import FancyButton from "../common/FancyButton";
 import styles from './AnimalAdder.module.css'
-import Loader from "./Loader";
-import FormField from "./FormField";
-import FormSelectField from "./FormSelectField";
+import Loader from "../common/Loader";
+import FormField from "../common/FormField";
+import FormSelectField from "../common/FormSelectField";
 
 function AnimalAdder() {
     const [animal, setAnimal] = useState({

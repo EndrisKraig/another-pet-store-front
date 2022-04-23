@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./AnimalCard.module.css"
-import FancyButton from "./FancyButton";
-import ParamCouple from "./ParamCouple";
+import FancyButton from "../common/FancyButton";
+import ParamCouple from "../common/ParamCouple";
 
 export default function AnimalCard(props) {
     var animal = props.animal;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./AnimalCardsHolder.module.css"
-import Loader from "./Loader";
-import { GetRequest } from "../service/FetchService.js"
+import Loader from "../common/Loader";
+import { GetRequest } from "../../service/FetchService.js"
 import AnimalCard from "./AnimalCard";
-import Pagination from "./Pagination";
+import Pagination from "..//Pagination";
 
 export default function AnimalCardHolder() {
 

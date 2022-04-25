@@ -3,6 +3,7 @@ import styles from "./NavigationBar.module.css"
 import { GetRequestAuth } from "../../service/FetchService"
 import NavigationRef from "./NavigationRef";
 import NavigationProfile from "./NavigationProfile";
+import FetchError from "../common/FetchError";
 
 const links = [{"name":"Home", "link":"/"},{"name":"Animals", "link":"/animals"},{"name":"Add animal", "link":"/add"}];
 
@@ -21,12 +22,17 @@ export default function NavigationBar(props) {
                     setElems({ ...elems, nickname: resp.nickname, isLoggedIn: true, isLoaded: true, balance: resp.balance });
                 },
                 (error) => {
-                    setElems({ ...elems, isLoaded: true });
+                    setElems({ ...elems, isLoaded: true, error: true });
                 },
                 token);
         }
     }
     );
+
+    if(elems.error){
+        return <FetchError/>
+    }
+
     const updateActiveLink = (link) => sessionStorage.setItem('activeTab', link);
 
     const renderLinks = links.map((l) => {

@@ -5,6 +5,7 @@ import styles from './AnimalAdder.module.css'
 import Loader from "../common/Loader";
 import FormField from "../common/FormField";
 import FormSelectField from "../common/FormSelectField";
+import FetchError from "../common/FetchError";
 
 function AnimalAdder() {
     const [animal, setAnimal] = useState({
@@ -27,7 +28,7 @@ function AnimalAdder() {
                         setData({ ...data, breeds: resp.references })
                     },
                     (err) => {
-
+                        setData({ ...data, error: true })
                     }
                 );
             }
@@ -37,7 +38,7 @@ function AnimalAdder() {
                         setData({ ...data, types: resp.references })
                     },
                     (err) => {
-
+                        setData({ ...data, error: true })
                     }
                 );
             }
@@ -49,6 +50,10 @@ function AnimalAdder() {
 
     if (!data.isLoaded) {
         return (<Loader />)
+    }
+
+    if(data.error){
+        return <FetchError/>
     }
 
     const submit = e => {

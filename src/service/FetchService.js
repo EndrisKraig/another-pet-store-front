@@ -5,7 +5,11 @@ export function GetRequest(path, resultSaver, errorSaver) {
         .then(res => res.json())
         .then(
             (result) => {
-                resultSaver(result);
+                if(result.ok){
+                    resultSaver(result);
+                }else{
+                    errorSaver(result);
+                }
             },
             (error) => {
                 errorSaver(error);
@@ -22,7 +26,11 @@ export function GetRequestAuth(path, resultSaver, errorSaver, token) {
         .then(res => res.json())
         .then(
             (result) => {
-                resultSaver(result);
+                if(result.ok){
+                    resultSaver(result);
+                }else{
+                    errorSaver(result);
+                }
             },
             (error) => {
                 errorSaver(error);
@@ -51,7 +59,11 @@ export function PostRequestNew(path, data, resultSaver, errorSaver, token) {
         .then(res => res.json())
         .then(
             (result) => {
-                resultSaver(result);
+                if(result.ok){
+                    resultSaver(result);
+                }else{
+                    errorSaver(result);
+                }
             },
             (error) => {
                 errorSaver(error);

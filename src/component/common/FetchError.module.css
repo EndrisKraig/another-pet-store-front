@@ -1,0 +1,11 @@
+.error{
+    font-size: large;
+    text-align: center;
+    position: absolute;
+    text-align: center;
+    background-color: rgb(220, 253, 31);
+    top: 40%;
+    left: 30%;
+    padding: 1%;
+    border-radius: 10px;
+}

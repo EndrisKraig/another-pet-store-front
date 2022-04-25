@@ -4,19 +4,20 @@ import Loader from "../common/Loader";
 import { GetRequest } from "../../service/FetchService.js"
 import AnimalCard from "./AnimalCard";
 import Pagination from "..//Pagination";
+import FetchError from "../common/FetchError";
 
 export default function AnimalCardHolder() {
 
-    const [data, setData] = useState({ "isLoaded": false, "limit": 10, "page": 1 });
+    const [data, setData] = useState({ "isLoaded": false, "limit": 10, "page": 1, isError: false });
 
     useEffect(() => {
         if (!data.isLoaded) {
             GetRequest("/animals?page=" + data.page + "&limit=" + data.limit,
                 (resp) => {
-                    setData({ ...data, "isLoaded": true, "resp": resp });
+                    setData({ ...data, isLoaded: true, resp: resp });
                 },
                 (error) => {
-                    console.log(error);
+                    setData({...data, isLoaded: true, isError: true });
                 }
             );
         }
@@ -24,6 +25,10 @@ export default function AnimalCardHolder() {
 
     if (data.isLoaded === false) {
         return <Loader />
+    }
+
+    if(data.isError === true){
+        return (<FetchError/>)
     }
 
     var animals = data.resp.animals;

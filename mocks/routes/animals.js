@@ -128,7 +128,14 @@ module.exports = [
             status: 200, // status to send
             body: ANIMALS_RESPONSE, // body to send
           },
-        }
+        },
+        {
+            id: "error", 
+            response: {
+              status: 500, 
+              body: {statusMessage: "Unexpected server error"},
+            },
+          }
       ],
     },
 ]

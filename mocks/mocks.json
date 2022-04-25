@@ -2,5 +2,9 @@
   {
     "id": "base",
     "routesVariants": ["get-animals:success", "get-specials:success"]
+  },
+  {
+    "id": "animal-error",
+    "routesVariants": ["get-animals:error", "get-specials:success"]
   }
 ]

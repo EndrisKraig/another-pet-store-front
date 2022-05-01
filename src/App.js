@@ -15,6 +15,7 @@ import styles from "./App.module.css"
 import AnimalCardHolder from "./component/animal/AnimalCardsHolder";
 import AnimalSold from "./component/animal/AnimalSold";
 import ErrorSoldAnimal from "./component/animal/ErrorSoldAnimal"
+import Chat from "./component/chat/Chat";
 
 export default function App() {
   const { token, setToken } = useToken();
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="animals" element={<AnimalCardHolder />} />
           <Route path="animals/:id/success" element={<AnimalSold />} />
           <Route path="animals/:id/error" element={<ErrorSoldAnimal />} />
+          <Route path="chat" element={<Chat/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -42,8 +42,12 @@ export default function Login({setToken}) {
                     <input type="password" onChange={e => setPassword(e.target.value)}/>
                 </label>
                 <p/>
-                <div>
-                    <FancyButton label="Login" action={() => window.location.href = "/"}/>
+                <div className={styles.center}>
+                    <FancyButton label="Login" style={styles.btn} action={() => window.location.href = "/"}/>
+                </div>
+                <p/>
+                <div className={styles.center}>
+                    <a href="/registration">Create new account</a>
                 </div>
             </form>
         </div>

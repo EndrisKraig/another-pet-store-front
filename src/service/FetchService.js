@@ -1,15 +1,11 @@
-const BASE_URL = "http://localhost:3100";//"http://localhost:8080";
-
+const BASE_URL = "http://localhost:8080";
+//"http://localhost:3100";//
 export function GetRequest(path, resultSaver, errorSaver) {
     fetch(BASE_URL + path)
         .then(res => res.json())
         .then(
             (result) => {
-                if(result.ok){
-                    resultSaver(result);
-                }else{
-                    errorSaver(result);
-                }
+                resultSaver(result);
             },
             (error) => {
                 errorSaver(error);
@@ -26,11 +22,7 @@ export function GetRequestAuth(path, resultSaver, errorSaver, token) {
         .then(res => res.json())
         .then(
             (result) => {
-                if(result.ok){
-                    resultSaver(result);
-                }else{
-                    errorSaver(result);
-                }
+                resultSaver(result);
             },
             (error) => {
                 errorSaver(error);
@@ -54,16 +46,12 @@ export function PostRequestNew(path, data, resultSaver, errorSaver, token) {
     fetch(BASE_URL + path, {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json', 'Authorization': token},
+        headers: { 'Content-Type': 'application/json', 'Authorization': token },
     })
         .then(res => res.json())
         .then(
             (result) => {
-                if(result.ok){
-                    resultSaver(result);
-                }else{
-                    errorSaver(result);
-                }
+                resultSaver(result);
             },
             (error) => {
                 errorSaver(error);

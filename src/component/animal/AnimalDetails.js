@@ -33,7 +33,7 @@ export default function AnimalDetails() {
     return (<Loader />);
   }
   return (
-    <AnimalCard animal={animalDetails.animal} buttonAction={() => act()} />
+    <AnimalCard animal={animalDetails.animal} buttonLabel="Buy now!" buttonAction={() => act()} />
   );
 }
 

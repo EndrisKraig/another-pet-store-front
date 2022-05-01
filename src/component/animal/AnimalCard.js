@@ -20,7 +20,7 @@ export default function AnimalCard(props) {
                 <ParamCouple param="Create" value={animal.createAt} />
             </div>
             <div className={styles.btn_container}>
-                <FancyButton style={styles.btn} label={'Adopt now!'} btnAction={props.buttonAction} />
+                <FancyButton style={styles.btn} label={props.buttonLabel} btnAction={props.buttonAction} />
             </div>
         </div>
     )

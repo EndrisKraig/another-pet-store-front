@@ -17,7 +17,7 @@ export default function AnimalCardHolder() {
                     setData({ ...data, isLoaded: true, resp: resp });
                 },
                 (error) => {
-                    setData({...data, isLoaded: true, isError: true });
+                    setData({ ...data, isLoaded: true, isError: true });
                 }
             );
         }
@@ -27,19 +27,19 @@ export default function AnimalCardHolder() {
         return <Loader />
     }
 
-    if(data.isError === true){
-        return (<FetchError/>)
+    if (data.isError === true) {
+        return (<FetchError />)
     }
 
     var animals = data.resp.animals;
     const animalsList = animals.map((animal) => {
-        return (<AnimalCard key={animal.id} animal={animal} />)
+        return (<AnimalCard key={animal.id} animal={animal} buttonLabel="Adopt now!" buttonAction={() => { window.location.href = "/animals/" + animal.id }} />)
     });
 
     return (
         <div className={styles.outer}>
             {animalsList}
-            <Pagination className={styles.outer} currentPage={data.page} pageSize={data.limit} totalPageCount={data.resp.maxPage} onPageChange={(page) => setData({"page":page, "isLoaded":false, "limit":data.limit})} />
+            <Pagination className={styles.outer} currentPage={data.page} pageSize={data.limit} totalPageCount={data.resp.maxPage} onPageChange={(page) => setData({ "page": page, "isLoaded": false, "limit": data.limit })} />
         </div>
     )
 }

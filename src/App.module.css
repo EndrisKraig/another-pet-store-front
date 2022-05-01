@@ -4,3 +4,7 @@
   margin: 0;
   overflow-y: auto;
 }
+
+body{
+  background: rgb(240, 240, 240);
+}

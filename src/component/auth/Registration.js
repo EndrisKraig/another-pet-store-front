@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PostRequest } from "../../service/FetchService"
 import FancyButton from "../common/FancyButton";
+import styles from "./Registration.module.css"
 //TODO form validation
 export default function Registration() {
     const [profile, setProfile] = useState();
@@ -10,7 +11,7 @@ export default function Registration() {
     }
 
     return (
-        <div>
+        <div className={styles.out}>
             <h1>Please name yourself to join our community!</h1>
             <form onSubmit={() => handleSubmit(profile)}>
                 <label>
@@ -31,7 +32,7 @@ export default function Registration() {
                 </label>
                 <p />
                 <div>
-                    <FancyButton label="Register" />
+                    <FancyButton label="Register" style={styles.btn} />
                 </div>
             </form>
         </div>

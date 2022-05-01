@@ -27,7 +27,7 @@ export default function App() {
           <Route path="/" element={<MainScreen />} />
           <Route path="animals/:id" element={<AnimalDetails />} />
           <Route path="add" element={<AnimalAdder />} />
-          <Route path="register" element={<Registration />} />
+          <Route path="registration" element={<Registration />} />
           <Route path="login" element={<Login setToken={setToken} />} />
           <Route path="animals" element={<AnimalCardHolder />} />
           <Route path="animals/:id/success" element={<AnimalSold />} />

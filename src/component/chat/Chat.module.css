@@ -1,24 +1,41 @@
 .out{
     display: flex;
-    align-content: center;
-    margin: auto;
-    justify-content: center;
+    
     width: 50%;
     border: 1px solid black;
     flex-direction: column;
     background-color: white;
+    margin: 10px auto;
+
+    height: 800px;
+    overflow-y: scroll;
 }
 
 .message_from{
     display: flex;
-    margin: auto;
-    align-self: right;
-    width: 40%;  
+    flex-direction: row-reverse;
+    align-self:flex-end;
+    width: 80%;  
+    margin: 10px 5px;
+    background-color: green;
+    border-radius: 7px;
 }
 
 .message_to{
     display: flex;
-    margin: auto;
-    align-self: right;
-    width: 40%;   
+    align-self: left;
+    width: 80%;   
+    margin: 10px 5px;
+    background-color: rgb(158, 158, 226);
+    border-radius: 7px;
+    
+}
+
+.send{
+    display: flex;
+    justify-content: center;
+}
+
+.text{
+    padding: 5px;
 }

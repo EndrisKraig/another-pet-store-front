@@ -11,8 +11,6 @@ export default function Chat() {
         setData({ ...data, isConnected: true });
     }
 
-
-
     socket.onmessage = function (event) {
         var mess = data.messages;
         const d = event.data;
@@ -33,18 +31,37 @@ export default function Chat() {
 
     socket.onclose = function (event) {
         console.log("disconnected!")
+        socket.close();
         setData({ ...data, isConnected: false });
     };
-    return (<div className={styles.out}><div>
-        <input type="text" onChange={e => setData({ ...data, message: e.target.value })} />
-        <button onClick={e => send(data.message)}>send</button>
-    </div>
-        <div>{formatMessages(data.messages)}</div></div>)
+    return (
+        <div>
+            <div className={styles.out}>
+                {formatMessages(data.messages, data.id)}
+            </div>
+            <div className={styles.send}>
+                <input type="text" onChange={e => setData({ ...data, message: e.target.value })} />
+                <button onClick={e => send(data.message)}>send</button>
+            </div>
+        </div>
+
+    );
 }
 
-function formatMessages(messages) {
+function formatMessages(messages, id) {
     return messages.map(a => {
-        return (<div className={styles.message_me}>{a.text}</div>)
+        console.log(id);
+        var style;
+        if (a.sender === id) {
+            style = styles.message_from;
+        } else {
+            style = styles.message_to;
+        }
+        return (
+            <div className={style}>
+                <div className={styles.text}>{a.text}</div>
+            </div>
+        );
     }
     );
 }

@@ -5,7 +5,7 @@ import NavigationRef from "./NavigationRef";
 import NavigationProfile from "./NavigationProfile";
 import FetchError from "../common/FetchError";
 
-const links = [{"name":"Home", "link":"/"},{"name":"Animals", "link":"/animals"},{"name":"Add animal", "link":"/add"}];
+const links = [{"name":"Home", "link":"/"},{"name":"Animals", "link":"/animals"},{"name":"Add animal", "link":"/add"},{"name":"Chat","link":"/chat"}];
 
 export default function NavigationBar(props) {
     const savedTab = sessionStorage.getItem('activeTab');

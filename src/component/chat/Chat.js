@@ -8,54 +8,58 @@ import { hasSelectionSupport } from "@testing-library/user-event/dist/utils";
 var socket = null;
 
 export default function Chat() {
-    const [data, setData] = useState({ messages: [], isConnected: false, ticket: "", isLoaded: false, id: null });
+    const [data, setData] = useState({ isConnected: false, isLoaded: false });
+    const [messages, setMessages] = useState({messages: []});
+    const [id, setId] = useState();
+    const [ticket, setTicket] = useState("");
+    const [message, setMessage] = useState();
     const { token, setToken } = useToken();
-    console.log(data);
     useEffect(() => {
-        if (data.ticket === "" && data.isConnected === false) {
+        if (ticket === "" && data.isConnected === false) {
             GetRequestAuth("/chat/ticket", (res) => {
-                const ticket = res.ticket;
-                setData({ ...data, "ticket": ticket, aaa: ticket });
-
+                setTicket(res.ticket);
             },
                 (err) => {
                     console.log(err);
                 },
                 token);
             GetRequestAuth("/profile", (res) => {
-                setData({...data, id: res.id})
+                setId(res.id);
             },
-            (err) => {
-                console.log(err);
-            },
-            token);
+                (err) => {
+                    console.log(err);
+                },
+                token);
         }
-        if(data.ticket !== "" && data.isConnected === false){
-            setUpSocket(data, setData);
+        if (ticket !== "" && data.isConnected === false) {
+            setUpSocket(data, setData, messages, setMessages, ticket);
         }
-    }, [data, token]);
+    }, [data, token, id, messages, ticket, message]);
 
-    // if (data.isConnected === false) {
-    //     return (<Loader />);
-    // }
-
-    const send = (message) => {
-        var m = JSON.stringify({ "text": message });
-        console.log(socket);
-        socket.send(m);
-        setData({...data, isConnected: true});
+    if (data.isConnected === false) {
+        return (<Loader />);
     }
 
-    const onChange = (value) => {setData({...data, message: value})}
+    const send = (event) => {
+        var mess = messages.messages;
+        var format = { "text": event.target.value, "sender": id };
+        event.target.value = "";
+        var m = JSON.stringify(format);
+        mess.push(format);
+        socket.send(m);
+        setMessages({messages: mess});
+    }
+
+    const onChange = (value) => { setMessage(value) }
 
     return (
         <div>
             <div className={styles.out}>
-                {formatMessages(data.messages, data.id)}
+                {formatMessages(messages, id)}
             </div>
             <div className={styles.send}>
-                <input type="text" onChange={e => onChange(e.target.value)} />
-                <button onClick={e => send(data.message)}>send</button>
+                <input type="text" onChange={e => onChange(e)} />
+                <button onClick={e => send(message)}>send</button>
             </div>
         </div>
 
@@ -63,7 +67,7 @@ export default function Chat() {
 }
 
 function formatMessages(messages, id) {
-    return messages.map(a => {
+    return messages.messages.map(a => {
         var style;
         if (a.sender === id) {
             style = styles.message_from;
@@ -79,21 +83,21 @@ function formatMessages(messages, id) {
     );
 }
 
-async  function setUpSocket(data, setData) {
+async function setUpSocket(data, setData, messages, setMessages, ticket) {
     if (socket === null && data.ticket !== "" && data.isConnected === false) {
         socket = new WebSocket("ws://localhost:8080/chat/rooms/1100");
 
-        // socket.onopen = (e) => {
-        //     console.log('OPENED')
-        //     socket.send(JSON.stringify({ "ticket": data.ticket }));
-        // };
+        socket.onopen = (e) => {
+            console.log('OPENED')
+            socket.send(JSON.stringify({ "ticket": ticket }));
+        };
 
         socket.onmessage = (event) => {
-            var mess = data.messages;
+            var mess = messages.messages;
             const d = event.data;
             const socketData = JSON.parse(d);
             mess.push(socketData);
-            setData({...data, messages: mess });
+            setMessages({messages: mess});
 
         };
 
@@ -104,7 +108,5 @@ async  function setUpSocket(data, setData) {
             // data.socket = null;
         };
         setData({ ...data, isLoaded: true, isConnected: true });
-        await new Promise(r => setTimeout(r, 2000));
-        socket.send(JSON.stringify({ "ticket": data.ticket }));
     }
 }

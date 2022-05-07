@@ -51,7 +51,31 @@ export default function Chat() {
     }
 
     const onChange = (value) => { setMessage(value) }
+    socket.onopen = (e) => {
+        console.log('OPENED')
+        socket.send(JSON.stringify({ "ticket": ticket }));
+    };
 
+    socket.onmessage = (event) => {
+        var mess = messages.messages;
+        const d = event.data;
+        const socketData = JSON.parse(d);
+        if(socketData.type === 'history'){
+            setMessages({messages: socketData.messages});
+        }else{
+            mess.push(socketData);
+            setMessages({messages: mess});
+        }
+
+
+    };
+
+    socket.onclose = (event) => {
+        console.log("disconnected!")
+        // socket.close();
+        // setData({ ...data, isConnected: false });
+        // data.socket = null;
+    };
     return (
         <div>
             <div className={styles.out}>
@@ -83,30 +107,9 @@ function formatMessages(messages, id) {
     );
 }
 
-async function setUpSocket(data, setData, messages, setMessages, ticket) {
+function setUpSocket(data, setData, messages, setMessages, ticket) {
     if (socket === null && data.ticket !== "" && data.isConnected === false) {
         socket = new WebSocket("ws://localhost:8080/chat/rooms/1100");
-
-        socket.onopen = (e) => {
-            console.log('OPENED')
-            socket.send(JSON.stringify({ "ticket": ticket }));
-        };
-
-        socket.onmessage = (event) => {
-            var mess = messages.messages;
-            const d = event.data;
-            const socketData = JSON.parse(d);
-            mess.push(socketData);
-            setMessages({messages: mess});
-
-        };
-
-        socket.onclose = (event) => {
-            console.log("disconnected!")
-            // socket.close();
-            // setData({ ...data, isConnected: false });
-            // data.socket = null;
-        };
         setData({ ...data, isLoaded: true, isConnected: true });
     }
 }

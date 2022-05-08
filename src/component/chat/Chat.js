@@ -76,9 +76,12 @@ export default function Chat() {
         // setData({ ...data, isConnected: false });
         // data.socket = null;
     };
+
+       
+    
     return (
-        <div>
-            <div className={styles.out}>
+        <div className={styles.wrapper}>
+            <div id="chatBox" className={styles.out}>
                 {formatMessages(messages, id)}
             </div>
             <div className={styles.send}>

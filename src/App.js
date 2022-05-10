@@ -19,7 +19,7 @@ import Chat from "./component/chat/Chat";
 
 export default function App() {
   const { token, setToken } = useToken();
-
+  window.React1 = require('react')
   return (
     <div className={styles.container}>
       <NavigationBar token={token} />

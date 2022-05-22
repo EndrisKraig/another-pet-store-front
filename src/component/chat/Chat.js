@@ -3,6 +3,7 @@ import styles from "./Chat.module.css"
 import useToken from "../../hook/useToken";
 import { GetRequestAuth } from "../../service/FetchService"
 import Loader from "../common/Loader";
+import Stickers from "./Stickers";
 
 var socket = null;
 
@@ -49,16 +50,25 @@ export default function Chat() {
         return (<Loader />);
     }
 
-    const send = (event) => {
+
+
+    const send = (text, format) => {
         var mess = messages.messages;
-        var format = { "text": event.target.value, "sender": id };
-        event.target.value = "";
-        var m = JSON.stringify(format);
-        mess.push(format);
+        var jsonMessage = { "text": text, "sender": id, "format": format };
+        var m = JSON.stringify(jsonMessage);
+        mess.push(jsonMessage);
         socket.send(m);
         setMessages({ messages: mess });
     }
 
+    const sendText = (event) => {
+        send(event.target.value, 'text');
+        event.target.value = "";
+    };
+
+    const sendSticker = (url) => {
+        send(url, 'sticker')
+    }
     const onChange = (value) => { setMessage(value) }
 
     socket.onopen = (e) => {
@@ -91,10 +101,10 @@ export default function Chat() {
             </div>
             <div className={styles.send}>
                 <input type="text" onChange={e => onChange(e)} />
-                <button onClick={e => send(message)}>send</button>
+                <button onClick={e => sendText(message)}>send</button>
             </div>
+            <Stickers send={sendSticker} />
         </div>
-
     );
 }
 
@@ -106,11 +116,19 @@ function formatMessages(messages, id) {
         } else {
             style = styles.message_to;
         }
-        return (
-            <div id={a.text} className={style}>
-                <div id={a.text} className={styles.text}>{a.text}</div>
-            </div>
-        );
+        if (a.format === 'text') {
+            return (
+                <div id={a.text} className={style}>
+                    <div id={a.text} className={styles.text}>{a.text}</div>
+                </div>
+            );
+        } else {
+            return (
+                <div id={a.text} className={style}>
+                    <img id={a.text} src={a.text} alt={a.text} className={styles.sticker}/>
+                </div>
+            );
+        }
     }
     );
 }

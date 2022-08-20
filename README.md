@@ -8,8 +8,9 @@ This is a typical react app builded from create-react-app command. At the moment
 
 1. Check out this project to your working machine
 2. Navigate to source dir
-3. npm i
-4. npm start
+3. npm install node-sass --save
+4. npm i
+5. npm start
 
 Thats it. If the server is up and already got some data then most likely you can see the project in browser (default address http://localhost:3000). Otherwise outcome is unpredictable. Reliability is still in backlog.
 
